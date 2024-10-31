@@ -1,0 +1,14 @@
+{% load thumbnail %}
+{% load static %}
+{% for user in users %}
+    <a href="{% url 'social:user_detail' user.username %}">
+        {% if user.photo %}
+            <img src="{% thumbnail user.photo 200x0 quality=80 %}">
+        {% else %}
+            <img src="{% static 'images/profile/download.png' %}">
+        {% endif %}
+    </a>
+    <a href="{% url 'social:user_detail' user.username %}">
+        <p>{{ user.get_full_name }}</p>
+    </a>
+{% endfor %}

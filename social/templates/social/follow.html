@@ -1,0 +1,15 @@
+Followers :
+<br>
+{% for follower in user.follower.all %}
+    <a href="{{ follower.get_absolute_url }}">{{ follower.username }}</a>
+{% empty %}
+    No follower !
+{% endfor %}
+<hr>
+Following :
+<br>
+{% for following in user.following.all %}
+     <a href="{{ following.get_absolute_url }}">{{ following.username }}</a>
+{% empty %}
+    No following !
+{% endfor %}

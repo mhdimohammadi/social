@@ -1,0 +1,38 @@
+{% load thumbnail %}
+{% load static %}
+{% with user=request.user %}
+    <p>{{ user.get_full_name }}</p>
+    {% if user.photo %}
+        <a href="{{ user.photo.url }}">
+            <img src="{% thumbnail user.photo 200x0 quality=80 %}">
+        </a>
+    {% else %}
+        <img src="{% static 'images/profile/download.png' %}">
+    {% endif %}
+{% endwith %}
+<p>welcome</p>
+<br>
+<a href="{% url 'social:create_post' %}">create post</a>
+<br>
+{% for post in posts %}
+    <a href="{{ post.get_absolute_url }}">{{ post.description|truncatewords:10 }}</a>
+    <br>
+    <a href="{% url 'social:edit_post' post.id %}" style="color: red">edit post</a>
+    <br>
+    <a href="{% url 'social:delete_post' post.id %}" style="color: black">delete post</a>
+    <br>
+{% endfor %}
+<br>
+<h2 style="color: blueviolet">saved posts</h2>
+
+{% for post in saved_posts %}
+    <a href="{{ post.get_absolute_url }}">
+        {{ post.description|truncatewords:20|linebreaks }}
+        <br>
+    </a>
+    published at {{ post.created }} by {{ post.author }}
+    <br>
+{% empty %}
+    no saved post
+{% endfor %}
+

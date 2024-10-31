@@ -1,0 +1,7 @@
+<h2>are ypu sure you want to delete this post?</h2>
+<a href="{% url 'social:profile' %}">return to profile </a>
+<br>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="حذف">
+</form>
